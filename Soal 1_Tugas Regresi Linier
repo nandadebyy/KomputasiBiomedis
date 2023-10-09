@@ -1,0 +1,39 @@
+#Nanda Deby Aulia Sitanggang
+#082111733013
+#Soal 1
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import linregress
+
+#Data tabel
+x = np.array([0.5, 1.0, 1.5, 2.0, 2.5])
+y = np.array([0.49, 1.60, 3.36, 6.44, 10.16])
+
+#Transformasi logaritmik
+ln_y = np.log(y)
+ln_x = np.log(x)
+
+#Melakukan regresi linier
+slope, intercept, r_value, p_value, std_err = linregress(ln_x, ln_y)
+
+#Parameter 'b' dan 'ln(a)'
+b = slope
+ln_a = intercept
+
+# Menghitung nilai 'a' dari 'ln(a)'
+a = np.exp(ln_a)
+
+# Menampilkan hasil
+print(f'Hasil Regresi:')
+print(f'a = {a:.4f}')
+print(f'b = {b:.4f}')
+print(f'Persamaan f(x) yang ditemukan: f(x) = {a:.4f} * x^{b:.4f}')
+
+# Plot data dan hasil regresi
+plt.scatter(x, y, label='Data')
+plt.plot(x, a * x ** b, label='Regresi', color='red')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.show()
